@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Book from '../containers/Book';
 import likeIcon from '../assets/like-symbol.png'
+import noImage  from "../no_image.svg";
 
 interface Props {
   book: Book;
@@ -18,7 +19,7 @@ const BookItem: React.FC<Props> = ({ book }) => {
         {book.cover ? (
             <img src={book.cover} alt={`${book.title} cover`} className="book-image" />
         ) : (
-            <div className="book-image">No image!</div>
+            <img src={noImage} alt="No cover" className="book-image" />
         )}
         <div className='bookInfo'>
             <h3 className="emphasize">{book.title}</h3>
