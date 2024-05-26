@@ -1,0 +1,94 @@
+.App {
+  text-align: center;
+  background: linear-gradient(to bottom, #2E1A47, #423457, #423457, #585F6D);
+}
+
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  color: #F4F1ED;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Creates a responsive grid with each column minimum 250px and maximum 1fr */
+  grid-gap: 30px; 
+  margin: auto;
+  width: 80%; 
+  padding: 20px; 
+}
+
+.book-item {
+  border: 1px solid #222222a4;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; 
+  background: linear-gradient(to bottom, #a4eeff, #D3D0CC);
+}
+
+.book-image {
+  width: 100%; 
+  height: auto; 
+}
+
+.emphasize {
+  font-weight: bold;
+  text-align: center;
+}
+
+.bookInfo {
+  text-align: left;
+  width: 90%;
+}
+
+.logo {
+  width: 175px;
+  height: 175px;
+  margin: 0 auto;
+  display: block;
+}
+
+.likes {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px dotted #222222a4;
+  width: 100%;
+}
+
+.likeButton img {
+  width: 25px;
+  height: 25px;
+  background-color: transparent; 
+  border: none;    
+  cursor: pointer;
+}
+
+.likeButton {
+  border: none;
+  background-color: transparent;
+}
+
