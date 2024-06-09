@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import BookItem from '../components/BookItem';
-import Book from './Book';
-import api from '../containers/API';
+import useBooks from '../domain/hooks';
 
 const BookList: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+  const { books, state, error, refresh } = useBooks();
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const fetchedBooks = await api.getAllBooks();
-      setBooks(fetchedBooks.map((book: any, index: any) => ({ ...book, id: index })));
-    };
+    const intervalId = setInterval(() => {
+      refresh();
+    }, 60000);
 
-    fetchBooks().catch(console.error);
-  }, []);
+    return () => clearInterval(intervalId);
+  }, [refresh]);
+
+  if (state === 'loading') {
+    return <p>Loading books...</p>;
+  }
+
+  if (state === 'error') {
+    return <p>Error: {error?.message}</p>;
+  }
 
   return (
     <div className="book-list">
