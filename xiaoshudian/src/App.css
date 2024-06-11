@@ -24,10 +24,46 @@
   color: #F4F1ED;
 }
 
-.footer {
-  text-align: center;
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   padding: 20px;
 }
+
+.nav a, .footer-links a {
+  color: #F4F1ED;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav a:hover, .footer-links a:hover {
+  color: #ADD8E6; /* Light blue color */
+}
+
+.footer {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center-align items horizontally */
+  justify-content: center; /* Center content vertically in the container */
+  padding: 20px;
+  color: white; /* Example text color */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Adds space between the links */
+  width: 100%; /* Take full width to separate from attribution */
+  justify-content: center; /* Center these links horizontally */
+}
+
+.footer-attribution {
+  text-align: center; /* Center the attribution text */
+  width: 100%; /* Match width to ensure alignment */
+  margin-top: 10px; /* Add some space above the attribution */
+}
+
+
 
 .book-list {
   display: grid;
@@ -90,5 +126,20 @@
 .likeButton {
   border: none;
   background-color: transparent;
+}
+
+.newBook {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.notFound{
+  text-align: center;
+  padding: 20px;
+  color: #F4F1ED;
+  min-height: 100vh;
 }
 

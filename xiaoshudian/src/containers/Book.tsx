@@ -1,6 +1,10 @@
 interface Book {
-    id: number;
+    id?: number;
     title: string;
+    subtitle?: string;
+    isbn: string;
+    abtract?: string;
+    numPages: number;
     author: string;
     publisher: string;
     price: string;

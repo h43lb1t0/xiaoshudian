@@ -1,3 +1,5 @@
+import Book from "./Book";
+
 const apiURL: string = 'http://localhost:4730/books/';
 
 const getAllBooks = async () => {
@@ -13,4 +15,23 @@ const getAllBooks = async () => {
         return []; // Return an empty array to prevent further errors
     }
 }
-export default { getAllBooks };
+
+const createBook = async (book: Book) => {
+    try {
+        const response = await fetch(`${apiURL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(book),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    } catch (err) {
+        console.error('Failed to create book:', err);
+        return null;
+    }
+}
+export default { getAllBooks, createBook };
