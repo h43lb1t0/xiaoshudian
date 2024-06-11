@@ -74,6 +74,33 @@
   padding: 20px; 
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  color: white
+}
+
+.pagination button {
+  background-color: #ADD8E6; /* Light blue color */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.pagination button:hover {
+  background-color: #61dafb; /* Light blue color */
+  color: white;
+}
+
 .book-item {
   border: 1px solid #222222a4;
   padding: 10px;

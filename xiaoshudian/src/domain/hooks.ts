@@ -4,20 +4,22 @@ import api from "../containers/API";
 
 type FetchState = 'initial' | 'loading' | 'success' | 'error';
 
-const useBooks = () => {
+const useBooks = (page: number, limit: number) => {
     const [books, setBooks] = useState<Book[]>([]);
     const [state, setState] = useState<FetchState>('initial');
     const [error, setError] = useState<Error | null>(null);
 
     const fetchBooks = async () => {
         setState('loading');
-        const fetchedBooks = await api.getAllBooks();
-        if (fetchedBooks.length === 0) {
-            setState('error');
-            setError(new Error('Failed to fetch books'));
-        } else {
+        try {
+            const fetchedBooks = await api.getPagingBooks(page, limit);
+            if (fetchedBooks.length === 0) {
+                throw new Error('No more books available');
+            }
             setBooks(fetchedBooks);
             setState('success');
+        } catch (error) {
+            setState('error');
         }
     };
 
@@ -25,9 +27,9 @@ const useBooks = () => {
         fetchBooks();
         const intervalId = setInterval(fetchBooks, 60000);
         return () => clearInterval(intervalId);
-      }, []);
+    }, [page]); // Reacts to page change
 
-      return { books, state, error, refresh: fetchBooks };
+    return { books, state, error, refresh: fetchBooks };
 };
 
 export default useBooks;
