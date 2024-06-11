@@ -30,6 +30,20 @@ const getPagingBooks = async (page: number, limit: number) => {
     }
 }
 
+const getOneBook = async (isbn: string) => {
+    try {
+        const response = await fetch(`${apiURL}/${isbn}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const book = await response.json();
+        return book;
+    } catch (err) {
+        console.error('Failed to fetch book:', err);
+        return null;
+    }
+}
+
 const createBook = async (book: Book) => {
     try {
         const response = await fetch(`${apiURL}`, {
@@ -48,4 +62,4 @@ const createBook = async (book: Book) => {
         return null;
     }
 }
-export default { getAllBooks, getPagingBooks, createBook };
+export default { getAllBooks, getPagingBooks, getOneBook, createBook };

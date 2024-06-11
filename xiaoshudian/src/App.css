@@ -111,6 +111,15 @@
   background: linear-gradient(to bottom, #a4eeff, #D3D0CC);
 }
 
+.book-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.book-item:hover {
+  background: linear-gradient(to bottom, #ADD8E6, #D3D0CC);
+}
+
 .book-image {
   width: 100%; 
   height: auto; 
@@ -170,3 +179,77 @@
   min-height: 100vh;
 }
 
+.bookDetails-container-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.backButton {
+  display: flex;
+  text-align: left;
+}
+
+.backButton a {
+  text-decoration:dashed;
+  color: #F4F1ED;
+  padding: 5px;
+}
+
+.bookDetails-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%; /* Ensures the container takes full width */
+  background: linear-gradient(to bottom, #a4eeff, #D3D0CC);
+}
+
+.bookdetails-item {
+  display: flex;
+  flex-direction: row; /* Aligns children (image and details) in a row */
+  align-items: flex-start; /* Aligns children vertically in the center */
+  flex-grow: 1; /* Allows the container to grow and take necessary space */
+}
+
+.bookdetails {
+  text-align: left; /* Ensures text within this div is left-aligned */
+  margin-left: 20px; /* Adds spacing between the image and the text details */
+  padding: 0; /* Resets any default padding */
+  max-width: 60%;
+}
+
+.bookdetails h2, .bookdetails p {
+  margin: 5px 0; /* Reduces vertical margin around headers and paragraphs */
+}
+
+.cover-isbn {
+  display: flex;
+  flex-direction: column; /* Aligns children in a column */
+  align-items: center; /* Aligns children horizontally in the center */
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row; /* Aligns children in a row */
+  justify-content: space-between; /* Aligns children at the start and end of the container */
+  border-bottom: 1px solid #000000; /* Adds a border at the bottom of each row */
+}
+
+.bookDetails-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #000000;
+  padding-left: 20px;
+  flex-basis: 20%; /* Adjust based on preference for sidebar width */
+}
+
+.bookDetails-sidebar p {
+  margin: 10px 0;
+}
+
+.bookDetails-sidebar button {
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 80%; /* Adjust based on design preference */
+}

@@ -10,6 +10,7 @@ import About from './pages/about';
 import Imprint from './pages/Imprint';
 import NotFound from './pages/NotFound';
 import NewBook from './pages/NewBook';
+import BookDetails from './pages/BookDetails';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/NewBook" element={<NewBook />} />
+          <Route path="/books/:isbn" element={<BookDetails />} />
         </Routes>
         <Footer />
       </div>
