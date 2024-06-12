@@ -2,99 +2,51 @@ import Book from "./Book";
 
 const apiURL: string = 'http://localhost:4730/books/';
 
-const getAllBooks = async () => {
+const fetchAPI = async (url: string, options?: RequestInit) => {
     try {
-        const response = await fetch(`${apiURL}`);
+        const response = await fetch(url, options);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const books = await response.json();
-        return books;
+        return response.json();
     } catch (err) {
-        console.error('Failed to fetch books:', err);
-        return []; // Return an empty array to prevent further errors
+        console.error('Failed to fetch:', err);
+        return options?.method === 'GET' ? [] : null; // Return appropriate default value based on the method
     }
+}
+
+const getAllBooks = async () => {
+    return fetchAPI(apiURL);
 }
 
 const getPagingBooks = async (page: number, limit: number) => {
-    try {
-        const response = await fetch(`${apiURL}?_page=${page}&_limit=${limit}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const books = await response.json();
-        return books;
-    } catch (err) {
-        console.error('Failed to fetch books:', err);
-        return []; // Return an empty array to prevent further errors
-    }
+    return fetchAPI(`${apiURL}?_page=${page}&_limit=${limit}`);
 }
 
 const getOneBook = async (isbn: string) => {
-    try {
-        const response = await fetch(`${apiURL}/${isbn}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const book = await response.json();
-        return book;
-    } catch (err) {
-        console.error('Failed to fetch book:', err);
-        return null;
-    }
+    return fetchAPI(`${apiURL}/${isbn}`);
 }
 
 const createBook = async (book: Book) => {
-    try {
-        const response = await fetch(`${apiURL}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(book),
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    } catch (err) {
-        console.error('Failed to create book:', err);
-        return null;
-    }
+    return fetchAPI(apiURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(book)
+    });
 }
 
 const updateBook = async (book: Book) => {
-    try {
-        const response = await fetch(`${apiURL}/${book.isbn}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(book),
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    } catch (err) {
-        console.error('Failed to update book:', err);
-        return null;
-    }
+    return fetchAPI(`${apiURL}/${book.isbn}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(book)
+    });
 }
 
 const deleteBook = async (isbn: string) => {
-    try {
-        const response = await fetch(`${apiURL}/${isbn}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    } catch (err) {
-        console.error('Failed to delete book:', err);
-        return null;
-    }
+    return fetchAPI(`${apiURL}/${isbn}`, {
+        method: 'DELETE'
+    });
 }
 
 export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook, deleteBook };

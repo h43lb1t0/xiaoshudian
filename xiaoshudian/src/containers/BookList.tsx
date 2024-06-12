@@ -5,7 +5,7 @@ import Pagination from '../components/PaginationBar';
 
 const BookList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);  // Start from page 1
-  const { books, state, error, refresh } = useBooks(currentPage, 15);
+  const { books, state, error, refresh } = useBooks(currentPage, 16);
 
   if (state === 'loading') {
     return <p>Loading books...</p>;

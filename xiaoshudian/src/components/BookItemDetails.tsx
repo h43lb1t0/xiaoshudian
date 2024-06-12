@@ -32,8 +32,12 @@ const BookItemDetails = (book: Book) => {
                         <h2>{book.title}</h2>
                         <p><b>{book.subtitle}</b></p>
                         <div className='details-row'>
-                            <p>by {book.author} published in {book.publisher}</p>
-                            <p>{book.numPages} Pages</p>
+                            <p>
+                                {book.author && `by ${book.author}`}
+                                {book.author && book.publisher && ' published in '}
+                                {book.publisher && book.publisher}
+                            </p>
+                            <p>{book.numPages && `${book.numPages} Pages`}</p>
                         </div>
                         <br />
                         <p>{book.abstract}</p>
