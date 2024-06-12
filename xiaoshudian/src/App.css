@@ -309,3 +309,21 @@
   flex-direction: row;
   align-items: flex-start;
 }
+
+.deleteBook {
+  background-color: transparent; 
+  border: none;    
+  cursor: pointer;
+}
+
+.possibleActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.deleteBook img{
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+}

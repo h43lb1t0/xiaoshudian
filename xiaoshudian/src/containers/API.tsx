@@ -81,4 +81,20 @@ const updateBook = async (book: Book) => {
         return null;
     }
 }
-export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook };
+
+const deleteBook = async (isbn: string) => {
+    try {
+        const response = await fetch(`${apiURL}/${isbn}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    } catch (err) {
+        console.error('Failed to delete book:', err);
+        return null;
+    }
+}
+
+export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook, deleteBook };

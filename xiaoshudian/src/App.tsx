@@ -18,7 +18,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <NavBar /> {/* NavBar is now outside the Routes and will appear on all pages */}
+        <NavBar />
         <Routes>
           <Route path="/" element={<BookList />} />
           <Route path="/about" element={<About />} />

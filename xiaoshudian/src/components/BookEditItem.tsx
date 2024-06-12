@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const BookEditItem: React.FC<{ initialBook?: Book, onSubmit: (book: Book) => Promise<void> }> = ({ initialBook, onSubmit }) => {
     const [formData, setFormData] = useState({
         title: initialBook?.title || '',
-        subtitle: initialBook?.subtitle || '',  // Adding subtitle
+        subtitle: initialBook?.subtitle || '',
         author: initialBook?.author || '',
         pages: initialBook?.numPages?.toString() || '',
         publisher: initialBook?.publisher || '',
         isbn: initialBook?.isbn || '',
         price: initialBook?.price || '',
-        abstract: initialBook?.abstract || ''  // Adding abstract
+        abstract: initialBook?.abstract || '' 
     });
 
     // Handle input change
@@ -26,18 +26,18 @@ const BookEditItem: React.FC<{ initialBook?: Book, onSubmit: (book: Book) => Pro
 
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
 
         const bookItem: Book = {
             ...initialBook,
             title: formData.title,
-            subtitle: formData.subtitle, // Ensuring subtitle is passed
+            subtitle: formData.subtitle,
             author: formData.author,
             numPages: parseInt(formData.pages),
             publisher: formData.publisher,
             price: formData.price,
             isbn: formData.isbn,
-            abstract: formData.abstract  // Ensuring abstract is passed
+            abstract: formData.abstract
         };
 
         await onSubmit(bookItem);

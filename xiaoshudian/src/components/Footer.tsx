@@ -16,6 +16,8 @@ const Footer = () => {
         <a href="https://www.flaticon.com/de/kostenlose-icons/bleistift" title="bleistift Icons">
           Bleistift Icons erstellt von Freepik - Flaticon
         </a>
+        <br />
+        <a href="https://www.flaticon.com/de/kostenlose-icons/loschen" title="löschen Icons">Löschen Icons erstellt von Arkinasi - Flaticon</a>
       </div>
     </footer>
   );

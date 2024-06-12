@@ -21,7 +21,7 @@ const EditBook: React.FC = () => {
     }, [isbn]);
 
     const handleBookUpdate = async (updatedBook: Book) => {
-        const response = await API.updateBook(updatedBook); // Assuming updateBook is defined in your API
+        const response = await API.updateBook(updatedBook);
         if (response) {
             navigate('/books/' + updatedBook.isbn);
         } else {
