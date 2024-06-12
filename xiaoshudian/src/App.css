@@ -203,6 +203,15 @@
   background: linear-gradient(to bottom, #a4eeff, #D3D0CC);
 }
 
+.bookDetails-container a img {
+  width: 25px;
+  height: 25px;
+  background-color: transparent; 
+  border: none;    
+  cursor: pointer;
+  padding: 10px;
+}
+
 .bookdetails-item {
   display: flex;
   flex-direction: row; /* Aligns children (image and details) in a row */
@@ -292,4 +301,11 @@
 .editActions a {
   padding: 10px 20px;
   width: 45%;
+}
+
+
+.editBook {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }

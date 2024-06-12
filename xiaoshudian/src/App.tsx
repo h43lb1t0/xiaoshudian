@@ -11,6 +11,7 @@ import Imprint from './pages/Imprint';
 import NotFound from './pages/NotFound';
 import NewBook from './pages/NewBook';
 import BookDetails from './pages/BookDetails';
+import EditBook from './pages/EditBook';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/NewBook" element={<NewBook />} />
           <Route path="/books/:isbn" element={<BookDetails />} />
+          <Route path="/books/edit/:isbn" element={<EditBook />}/>
         </Routes>
         <Footer />
       </div>

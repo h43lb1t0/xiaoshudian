@@ -1,6 +1,7 @@
 import React from 'react';
 import Book from '../containers/Book';
 import { Link } from 'react-router-dom';
+import bearbeiten from '../assets/bearbeiten.png';
 
 
 const BookItemDetails = (book: Book) => {
@@ -27,6 +28,10 @@ const BookItemDetails = (book: Book) => {
                     </div>
 
                 </div>
+                <Link to={`/books/edit/${book.isbn}`}>
+                    <img src={bearbeiten} alt="edit book" />
+                </Link>
+
                 <div className="bookDetails-sidebar">
                         <p>{book.price}</p>
                         <button>Add to Shopping Cart</button>

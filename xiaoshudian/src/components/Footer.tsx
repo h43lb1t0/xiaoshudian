@@ -12,6 +12,10 @@ const Footer = () => {
         <a href="https://www.flaticon.com/de/kostenlose-icons/gefallt-mir-knopf" title="gefällt mir knopf Icons">
           Gefällt mir knopf Icons erstellt von Mudassir designs - Flaticon
         </a>
+        <br />
+        <a href="https://www.flaticon.com/de/kostenlose-icons/bleistift" title="bleistift Icons">
+          Bleistift Icons erstellt von Freepik - Flaticon
+        </a>
       </div>
     </footer>
   );

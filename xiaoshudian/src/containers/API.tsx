@@ -62,4 +62,23 @@ const createBook = async (book: Book) => {
         return null;
     }
 }
-export default { getAllBooks, getPagingBooks, getOneBook, createBook };
+
+const updateBook = async (book: Book) => {
+    try {
+        const response = await fetch(`${apiURL}/${book.isbn}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(book),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    } catch (err) {
+        console.error('Failed to update book:', err);
+        return null;
+    }
+}
+export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook };

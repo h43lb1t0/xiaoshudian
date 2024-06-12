@@ -29,6 +29,7 @@ const BookEditItem: React.FC<{ initialBook?: Book, onSubmit: (book: Book) => Pro
         e.preventDefault(); // Prevent default form submission behavior
 
         const bookItem: Book = {
+            ...initialBook,
             title: formData.title,
             subtitle: formData.subtitle, // Ensuring subtitle is passed
             author: formData.author,
@@ -70,7 +71,7 @@ const BookEditItem: React.FC<{ initialBook?: Book, onSubmit: (book: Book) => Pro
 
             <p>* fields are required</p>
             <div className="editActions">
-                <Link to="/">Cancle</Link>
+            <Link to={initialBook ? "/books/" + initialBook.isbn : "/"}>Cancel</Link>
                 <input type="submit" value={initialBook ? "Update Book" : "Create Book"} />
             </div>
         </form>
