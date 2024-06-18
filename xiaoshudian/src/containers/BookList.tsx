@@ -4,6 +4,7 @@ import useBooks from '../domain/hooks';
 import Pagination from '../components/PaginationBar';
 
 const BookList: React.FC = () => {
+
   const [currentPage, setCurrentPage] = useState(1);  // Start from page 1
   const { books, state, error, refresh } = useBooks(currentPage, 16);
 
@@ -24,6 +25,7 @@ const BookList: React.FC = () => {
       setCurrentPage(currentPage - 1); // Decrement the page number
     }
   }
+
 
   return (
     <div>

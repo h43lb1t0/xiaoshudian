@@ -26,9 +26,18 @@
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
   padding: 20px;
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: #F4F1ED;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .nav a, .footer-links a {
@@ -39,6 +48,18 @@
 
 .nav a:hover, .footer-links a:hover {
   color: #ADD8E6; /* Light blue color */
+}
+
+.rightNav {
+  display: flex;
+}
+
+.rightNav img {
+  width: 25px;
+  height: 25px;
+  background-color: transparent; 
+  border: none;    
+  cursor: pointer;
 }
 
 .footer {
@@ -327,3 +348,37 @@
   height: 25px;
   padding: 10px;
 }
+
+
+
+.checkoutItem {
+  margin-bottom: 20px; /* Space between items */
+}
+
+.titlePrice {
+  display: flex;  /* Align title and price in a row */
+  align-items: baseline; /* Align items by their baseline */
+}
+
+.title {
+  margin-right: 10px; /* Space between title and price */
+  font-weight: bold; /* Optional: makes title bold */
+}
+
+.price {
+  color: green; /* Optional: styling for price */
+  font-weight: bold; /* Optional: makes price bold */
+}
+
+.author {
+  margin-left: 20px; /* Indent for the author under the title */
+  font-style: italic; /* Optional: makes author italic */
+}
+
+.totalPrice {
+  font-size: 1.2em; /* Larger text for total price */
+  font-weight: bold; /* Makes total price bold */
+  margin-top: 20px; /* Space above the total price */
+}
+
+
