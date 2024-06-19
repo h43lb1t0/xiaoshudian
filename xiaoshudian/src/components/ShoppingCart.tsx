@@ -3,7 +3,8 @@ import { CartContext } from '../context/ShoppingCartContext';
 import { useAuth } from "../context/AuthContext";
 import API from "../containers/API";
 import Book from "../containers/Book";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import loeschen from "../assets/loschen.png";
 
 
 const getTotalPrice = (books: Book[]) => {
@@ -54,22 +55,26 @@ const ShoppingCart = () => {
     }
 
     return (
-        <div>
-            {bookList.map(book => (
-                <div className="checkoutItem">
-                    <div className="titlePrice">
-                        <p className="title">{book.title}</p>
-                        <p className="price">{book.price}</p>
-                        <button onClick={() => handleRemove(book.isbn)}>remove</button>
-                    </div>
-                    <p className="author">by {book.author}</p>
-                </div>
-            ))}
-            <div>
-                <p className="totalPrice">Total Price: ${getTotalPrice(bookList)}</p>
-                <button onClick={handleBuy}>Buy</button>
+        <div className="cart-outer">
+    {bookList.map(book => (
+        <div className="cart-middle" key={book.isbn}>
+            <div className="cart-book-info">
+                <Link to ={"/books/" + book.isbn}>{book.title}</Link>
+                <p>by {book.author}</p>
             </div>
+            <p className="book-price">{book.price}</p>
+            <button onClick={() => handleRemove(book.isbn)}>
+                <img src={loeschen} alt="delete book from cart" />
+            </button>
         </div>
+    ))}
+    <div className="cart-footer">
+        <button onClick={handleBuy}>Buy</button>
+        <p>Total: ${getTotalPrice(bookList)}</p>
+    </div>
+</div>
+
+
     );
 };
 

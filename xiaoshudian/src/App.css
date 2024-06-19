@@ -350,35 +350,70 @@
 }
 
 
-
-.checkoutItem {
-  margin-bottom: 20px; /* Space between items */
+.cart-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%;
 }
 
-.titlePrice {
-  display: flex;  /* Align title and price in a row */
-  align-items: baseline; /* Align items by their baseline */
+.cart-middle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px; /* Added for spacing between items */
+  justify-content: space-between;
 }
 
-.title {
-  margin-right: 10px; /* Space between title and price */
-  font-weight: bold; /* Optional: makes title bold */
+.cart-book-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1; /* Allow book info to take up remaining space */
 }
 
-.price {
-  color: green; /* Optional: styling for price */
-  font-weight: bold; /* Optional: makes price bold */
+.cart-book-info a {
+  text-decoration: underline;
+  color: #2E1A47;
+  font-weight: bold;
 }
 
-.author {
-  margin-left: 20px; /* Indent for the author under the title */
-  font-style: italic; /* Optional: makes author italic */
+.cart-book-info a:hover {
+  color: #13708e;
 }
 
-.totalPrice {
-  font-size: 1.2em; /* Larger text for total price */
-  font-weight: bold; /* Makes total price bold */
-  margin-top: 20px; /* Space above the total price */
+.book-price { /* Add this section */
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #2E1A47;
+  margin-right: 20px; /* Space between price and remove button */
+}
+
+.cart-outer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-right: 15px;
+}
+
+.cart-outer button img {
+  width: 20px;
+  height: 20px;
+}
+
+.cart-outer button img:hover {
+  width: 21px;
+  height: 21px;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
 }
 
 
