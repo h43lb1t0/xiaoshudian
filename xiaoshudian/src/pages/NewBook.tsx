@@ -12,7 +12,7 @@ const NewBook: React.FC = () => {
     const handleBookSubmit = async (book: Book) => {
         const response = await API.createBook(book);
         if (response) {
-            navigate('/');
+            navigate('/books/' + book.isbn);
         } else {
             alert('Failed to add book!');
         }
