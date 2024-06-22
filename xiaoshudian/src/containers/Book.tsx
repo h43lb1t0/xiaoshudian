@@ -1,9 +1,13 @@
 interface Book {
-    id: number;
+    id?: number;
     title: string;
-    author: string;
-    publisher: string;
-    price: string;
+    subtitle?: string;
+    isbn: string;
+    abstract?: string;
+    numPages?: number;
+    author?: string;
+    publisher?: string;
+    price?: string;
     cover?: string;
   }
 

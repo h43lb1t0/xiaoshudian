@@ -1,25 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BookItem from '../components/BookItem';
-import Book from './Book';
-import api from '../containers/API';
+import useBooks from '../domain/hooks';
+import Pagination from '../components/PaginationBar';
 
 const BookList: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);  // Start from page 1
+  const { books, state, error, refresh } = useBooks(currentPage, 16);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const fetchedBooks = await api.getAllBooks();
-      setBooks(fetchedBooks.map((book: any, index: any) => ({ ...book, id: index })));
-    };
+  if (state === 'loading') {
+    return <p>Loading books...</p>;
+  }
 
-    fetchBooks().catch(console.error);
-  }, []);
+  if (state === 'error') {
+    return <p>Error: {error?.message}</p>;
+  }
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1); // Increment the page number
+  }
+
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1); // Decrement the page number
+    }
+  }
 
   return (
-    <div className="book-list">
+    <div>
+      <div className="book-list">
       {books.map(book => (
         <BookItem key={book.id} book={book} />
       ))}
+      </div>
+      <Pagination 
+        currentPage={currentPage}
+        onPrevious={previousPage}
+        onNext={nextPage}
+      />
     </div>
   );
 };
