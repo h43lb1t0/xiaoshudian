@@ -19,7 +19,7 @@ const Footer = () => {
         <br />
         <a href="https://www.flaticon.com/de/kostenlose-icons/loschen" title="löschen Icons">Löschen Icons erstellt von Arkinasi - Flaticon</a>
         <br />
-        <a href="https://www.flaticon.com/de/kostenlose-icons/supermarkt" title="supermarkt Icons">Supermarkt Icons erstellt von Good Ware - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/shopping-cart" title="shopping cart icons">Shopping cart icons created by Vectors Market - Flaticon</a>
       </div>
     </footer>
   );

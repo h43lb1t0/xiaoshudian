@@ -20,7 +20,12 @@ const BookItemDetails = (book: Book) => {
         }
     }
 
-    const { addBook } = useContext(CartContext)!;
+    const { addBook, getBooks, removeBook } = useContext(CartContext)!;
+
+    const isBookInCart = (userID: string, id: string) => {
+        const cart = getBooks(userID);
+        return cart.some(book => book.isbn === id);
+    }
 
     const handleAddToCart = () => {
         if (userID && book.isbn) {
@@ -73,7 +78,11 @@ const BookItemDetails = (book: Book) => {
 
                 <div className="bookDetails-sidebar">
                         <p>{book.price}</p>
-                        <button disabled={userRole === "admin"} onClick={handleAddToCart}>Add to Shopping Cart</button>
+                        {userID && isBookInCart(userID, book.isbn) ? (
+                            <button onClick={() => removeBook(userID, book.isbn)}>Remove from Shopping Cart</button>
+                        ) : (
+                            <button disabled={userRole === "admin"} onClick={handleAddToCart}>Add to Shopping Cart</button>
+                        )}
                 </div>
             </div>
         </div>
