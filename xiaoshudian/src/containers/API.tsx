@@ -49,4 +49,12 @@ const deleteBook = async (isbn: string) => {
     });
 }
 
-export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook, deleteBook };
+const login = async (username: string, password: string) => {
+    return fetchAPI('http://localhost:4730/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password : password })
+    });
+}
+
+export default { getAllBooks, getPagingBooks, getOneBook, createBook, updateBook, deleteBook, login };

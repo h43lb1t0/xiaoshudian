@@ -12,24 +12,59 @@ import NotFound from './pages/NotFound';
 import NewBook from './pages/NewBook';
 import BookDetails from './pages/BookDetails';
 import EditBook from './pages/EditBook';
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
+import ShoppingBasket from './pages/ShoppingBasket';
+import { CartProvider } from './context/ShoppingCartContext';
+import Buy from './pages/Buy';
+
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<BookList />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/imprint" element={<Imprint />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/NewBook" element={<NewBook />} />
-          <Route path="/books/:isbn" element={<BookDetails />} />
-          <Route path="/books/edit/:isbn" element={<EditBook />}/>
-        </Routes>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <CartProvider>
+          <div className="App">
+          <Header />
+          <NavBar />
+          <Routes>
+            <Route path="/" element={
+              <ProtectedRoute requiredRoles={['admin', 'non-admin']}>
+                <BookList />
+              </ProtectedRoute>
+              } />
+            <Route path="/about" element={<About />} />
+            <Route path="/imprint" element={<Imprint />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/NewBook" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <NewBook />
+              </ProtectedRoute>
+              } />
+            <Route path="/books/:isbn" element={
+              <ProtectedRoute requiredRoles={['admin', 'non-admin']}>
+                <BookDetails />
+              </ProtectedRoute>
+              } />
+            <Route path="/books/edit/:isbn" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <EditBook />
+              </ProtectedRoute>
+              }/>
+            <Route path="/login" element={<Login />} />
+
+            <Route path='/checkout/basket' element={
+              <ProtectedRoute requiredRoles={['non-admin']}>
+                <ShoppingBasket />
+              </ProtectedRoute>
+            }/>
+            <Route path='/checkout/buy' element={<Buy/>}/>
+          </Routes>
+          <Footer />
+          </div>
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }

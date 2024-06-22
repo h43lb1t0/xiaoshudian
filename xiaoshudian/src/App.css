@@ -26,9 +26,18 @@
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
   padding: 20px;
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: #F4F1ED;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .nav a, .footer-links a {
@@ -39,6 +48,18 @@
 
 .nav a:hover, .footer-links a:hover {
   color: #ADD8E6; /* Light blue color */
+}
+
+.rightNav {
+  display: flex;
+}
+
+.rightNav img {
+  width: 25px;
+  height: 25px;
+  background-color: transparent; 
+  border: none;    
+  cursor: pointer;
 }
 
 .footer {
@@ -327,3 +348,90 @@
   height: 25px;
   padding: 10px;
 }
+
+
+.cart-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%;
+}
+
+.cart-middle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px; /* Added for spacing between items */
+  justify-content: space-between;
+}
+
+.cart-book-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1; /* Allow book info to take up remaining space */
+}
+
+.cart-book-info a {
+  text-decoration: underline;
+  color: #2E1A47;
+  font-weight: bold;
+}
+
+.cart-book-info a:hover {
+  color: #13708e;
+}
+
+.book-price { /* Add this section */
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #2E1A47;
+  margin-right: 20px; /* Space between price and remove button */
+}
+
+.cart-outer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-right: 15px;
+}
+
+.cart-outer button img {
+  width: 20px;
+  height: 20px;
+}
+
+.cart-outer button img:hover {
+  width: 21px;
+  height: 21px;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cart-footer button {
+  background-color: #ADD8E6; /* Light blue color */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.cart-footer button:hover {
+  background-color: #61dafb; /* Light blue color */
+  color: white;
+}
+
+
