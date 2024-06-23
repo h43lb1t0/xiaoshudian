@@ -35,6 +35,7 @@ const BookList: React.FC = () => {
       {books.map(book => (
         <BookItem key={book.id} book={book} />
       ))}
+      {books.length === 0 && <p>No more books to load.</p>}
       </div>
       <Pagination 
         currentPage={currentPage}
