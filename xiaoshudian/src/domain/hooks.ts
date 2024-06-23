@@ -14,7 +14,8 @@ const useBooks = (page: number, limit: number) => {
         try {
             const fetchedBooks = await api.getPagingBooks(page, limit);
             if (fetchedBooks.length === 0) {
-                throw new Error('No more books available');
+                setBooks([]);
+                setError(new Error('No more books to load.'));
             }
             setBooks(fetchedBooks);
             setState('success');

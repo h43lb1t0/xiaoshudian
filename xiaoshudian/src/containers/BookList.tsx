@@ -5,8 +5,10 @@ import Pagination from '../components/PaginationBar';
 
 const BookList: React.FC = () => {
 
+  const BOOKS_PER_PAGE = 16;
+
   const [currentPage, setCurrentPage] = useState(1);  // Start from page 1
-  const { books, state, error, refresh } = useBooks(currentPage, 16);
+  const { books, state, error } = useBooks(currentPage, BOOKS_PER_PAGE);
 
   if (state === 'loading') {
     return <p>Loading books...</p>;
@@ -38,6 +40,7 @@ const BookList: React.FC = () => {
         currentPage={currentPage}
         onPrevious={previousPage}
         onNext={nextPage}
+        disableNext={books.length < BOOKS_PER_PAGE || books.length === 0}
       />
     </div>
   );
