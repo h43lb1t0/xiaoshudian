@@ -1,16 +1,30 @@
-import React, { useContext, useEffect } from 'react';
-import Book from '../containers/Book';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import bearbeiten from '../assets/bearbeiten.png';
 import loschen from '../assets/loschen.png';
 import API from '../containers/API';
 import { useAuth } from '../context/AuthContext';
-import { CartContext } from '../context/ShoppingCartContext';
-
-
+import { addBook, removeBook, selectUserBooks } from '../store/bookSlice';
+import Book from '../containers/Book';
 
 const BookItemDetails = (book: Book) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { userRole, userID } = useAuth();
+    const userBooks = useSelector(state => selectUserBooks(state, userID!));
+
+    const isBookInCart = (id: string) => {
+        return userBooks.some((b: Book) => b.isbn === id);
+    }
+
+    const handleAddToCart = () => {
+        if (userID && book.isbn) {
+            dispatch(addBook({ userID, isbn: book.isbn }));
+        } else {
+            alert('Failed to add book to cart!');
+        }
+    };
+
     const deleteBook = async (isbn: string) => {
         const response = await API.deleteBook(isbn);
         if (response) {
@@ -19,24 +33,6 @@ const BookItemDetails = (book: Book) => {
             alert('Failed to delete book!');
         }
     }
-
-    const { addBook, getBooks, removeBook } = useContext(CartContext)!;
-
-    const isBookInCart = (userID: string, id: string) => {
-        const cart = getBooks(userID);
-        return cart.some(book => book.isbn === id);
-    }
-
-    const handleAddToCart = () => {
-        if (userID && book.isbn) {
-            addBook(userID, book.isbn);
-        } else {
-            alert('Failed to add book to cart!');
-        }
-    };
-
-
-    const { userRole, userID } = useAuth();
 
     return (
         <div className='bookDetails-container-container'>
@@ -77,12 +73,12 @@ const BookItemDetails = (book: Book) => {
                 }
 
                 <div className="bookDetails-sidebar">
-                        <p>{book.price}</p>
-                        {userID && isBookInCart(userID, book.isbn) ? (
-                            <button onClick={() => removeBook(userID, book.isbn)}>Remove from Shopping Cart</button>
-                        ) : (
-                            <button disabled={userRole === "admin"} onClick={handleAddToCart}>Add to Shopping Cart</button>
-                        )}
+                    <p>{book.price}</p>
+                    {userID && isBookInCart(book.isbn) ? (
+                        <button onClick={() => dispatch(removeBook({ userID, isbn: book.isbn }))}>Remove from Shopping Cart</button>
+                    ) : (
+                        <button disabled={userRole === "admin"} onClick={handleAddToCart}>Add to Shopping Cart</button>
+                    )}
                 </div>
             </div>
         </div>

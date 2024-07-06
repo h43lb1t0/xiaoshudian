@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -16,15 +15,16 @@ import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import ShoppingBasket from './pages/ShoppingBasket';
-import { CartProvider } from './context/ShoppingCartContext';
 import Buy from './pages/Buy';
+import store from './store/store';
+import { Provider } from 'react-redux';
 
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <CartProvider>
+        <Provider store={store}>
           <div className="App">
           <Header />
           <NavBar />
@@ -63,7 +63,7 @@ function App() {
           </Routes>
           <Footer />
           </div>
-        </CartProvider>
+        </Provider>
       </AuthProvider>
     </Router>
   );

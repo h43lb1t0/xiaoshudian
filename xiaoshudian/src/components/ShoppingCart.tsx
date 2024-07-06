@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { CartContext } from '../context/ShoppingCartContext';
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 import API from "../containers/API";
 import Book from "../containers/Book";
 import { Link, useNavigate } from "react-router-dom";
 import loeschen from "../assets/loschen.png";
-
+import { selectUserBooks, removeBook, emptyCart } from "../store/bookSlice";
 
 const getTotalPrice = (books: Book[]) => {
     var totalPrice = 0;
@@ -20,61 +20,66 @@ const getTotalPrice = (books: Book[]) => {
 const ShoppingCart = () => {
     const navigate = useNavigate();
     const { userID } = useAuth();
-    const { getBooks, emptyCart, removeBook } = useContext(CartContext)!;
+    const dispatch = useDispatch();
     
-    const [bookList, setBookList] = useState<Book[]>([]);
+    const userBooks = useSelector((state: any) => selectUserBooks(state, userID!));
+    const [bookDetails, setBookDetails] = useState<Book[]>([]);
 
     useEffect(() => {
-        if (userID) {
-            const books = getBooks(userID);
-            const isbnList = books.map(book => book.isbn);
-            
-            Promise.all(isbnList.map(isbn => API.getOneBook(isbn)))
-                .then(bookDetails => {
-                    setBookList(bookDetails);
+        let isMounted = true; // brower crashed without this when shopping cart was empty
+        if (userID && userBooks.length > 0) {
+            Promise.all(userBooks.map((book: Book) => API.getOneBook(book.isbn)))
+                .then((booksDetails: Book[]) => {
+                    if (isMounted) {
+                        setBookDetails(booksDetails);
+                    }
                 });
+        } else {
+            setBookDetails([]);
         }
-    }, [userID]);
+
+        return () => {
+            isMounted = false;
+        };
+    }, [userID, userBooks]);
 
     if (!userID) {
         return <div>You need to be logged in to view your shopping cart.</div>;
     }
 
     const handleBuy = () => {
-        emptyCart(userID);
+        dispatch(emptyCart(userID));
         navigate("/checkout/buy");
     };
 
     const handleRemove = (isbn: string) => {
-        removeBook(userID, isbn);
-        setBookList(currentBookList => currentBookList.filter(book => book.isbn !== isbn));
+        dispatch(removeBook({ userID, isbn }));
+        setBookDetails(currentDetails => currentDetails.filter(book => book.isbn !== isbn));
     };
 
-    if (bookList.length === 0) {
+    if (bookDetails.length === 0) {
         return <div>Your shopping cart is empty.</div>;
     }
 
     return (
         <div className="cart-outer">
-    {bookList.map(book => (
-        <div className="cart-middle" key={book.isbn}>
-            <div className="cart-book-info">
-                <Link to ={"/books/" + book.isbn}>{book.title}</Link>
-                <p>by {book.author}</p>
+            {bookDetails.map(book => (
+                <div className="cart-middle" key={book.isbn}>
+                    <div className="cart-book-info">
+                        <Link to={`/books/${book.isbn}`}>{book.title}</Link>
+                        <p>by {book.author}</p>
+                    </div>
+                    <p className="book-price">{book.price}</p>
+                    <button onClick={() => handleRemove(book.isbn)}>
+                        <img src={loeschen} alt="delete book from cart" />
+                    </button>
+                </div>
+            ))}
+            <div className="cart-footer">
+                <button onClick={handleBuy}>Buy</button>
+                <p>Total: ${getTotalPrice(bookDetails)}</p>
             </div>
-            <p className="book-price">{book.price}</p>
-            <button onClick={() => handleRemove(book.isbn)}>
-                <img src={loeschen} alt="delete book from cart" />
-            </button>
         </div>
-    ))}
-    <div className="cart-footer">
-        <button onClick={handleBuy}>Buy</button>
-        <p>Total: ${getTotalPrice(bookList)}</p>
-    </div>
-</div>
-
-
     );
 };
 

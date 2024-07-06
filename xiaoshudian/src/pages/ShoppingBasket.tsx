@@ -1,6 +1,3 @@
-// src/pages/Login.tsx
-import React, { useContext, useState } from 'react';
-
 import ShoppingCart from '../components/ShoppingCart';
 
 
